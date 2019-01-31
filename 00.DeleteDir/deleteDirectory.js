@@ -1,6 +1,7 @@
 
 const fs = require("fs");
 const PATH = require("path");
+
 //删除复杂内容文件夹封装
 function del(path,callback){
     (function stat(path){
@@ -13,19 +14,19 @@ function del(path,callback){
             if(stats.isFile()){
                 fs.unlinkSync(path);
             }else if(stats.isDirectory()){
-                 return new Promise((resolve, reject) => {
-                     fs.rmdir(path,(err)=>{
-                         if(err){
-                             resolve(path);
-                         }
-                     })
-                 })
+                return new Promise((resolve, reject) => {
+                    fs.rmdir(path,(err)=>{
+                        if(err){
+                            resolve(path);
+                        }
+                    })
+                })
             }
         }).then((path)=>{
             if(!path) return;
             fs.readdir(path,(err,data)=>{
                 data.forEach((p)=>{
-                  stat(PATH.join(path,p));
+                    stat(PATH.join(path,p));
                 })
                 stat(path);
             })
@@ -38,7 +39,7 @@ function del(path,callback){
 module.exports.del = del;
 
 
-/*
+/* eS5
     !function stat(path){
         fs.stat(path,(err,stats)=>{
             if(err) callback(err);
@@ -59,3 +60,12 @@ module.exports.del = del;
         })
     }(path);
  */
+
+
+
+
+
+
+
+
+
